@@ -1,4 +1,4 @@
-import jwt = require('jsonwebtoken');
+import * as jwt from 'jsonwebtoken';
 
 const secret = process.env.JWT_SECRET || 'jwt_secret';
 

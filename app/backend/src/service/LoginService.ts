@@ -1,4 +1,4 @@
-import bcrypt = require('bcryptjs');
+import * as bcrypt from 'bcryptjs';
 import jwt from '../Utils/jwt';
 import UserModel from '../database/models/UserModel';
 import IResponse from '../Interfaces/IResponse';
