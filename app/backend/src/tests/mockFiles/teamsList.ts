@@ -1,5 +1,4 @@
-import ITeams from '../../Interfaces/ITeams';
-const mockTeamList: ITeams[] = [
+const mockTeamList = [
     {
       "id": 1,
       "teamName": "Avaí/Kindermann"
