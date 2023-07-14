@@ -16,7 +16,7 @@ export default class LoginService {
       }
       return { status: 401, data: { message: 'Invalid email or password' } };
     }
-    return { status: 404, data: { message: 'Invalid email or password' } };
+    return { status: 401, data: { message: 'Invalid email or password' } };
   }
 
   async getRole(id: number): Promise<IResponse> {

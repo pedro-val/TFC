@@ -8,7 +8,7 @@ Promise<Response | void> => {
   }
   const { error } = joi.loginSchema.validate(req.body);
   if (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(401).json({ message: error.message });
   }
   next();
 };

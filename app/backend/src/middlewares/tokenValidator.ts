@@ -4,10 +4,13 @@ import IUser from '../Interfaces/IUser';
 
 async function authMiddleware(req: Request, res: Response, next: NextFunction)
   : Promise<Response | void> {
+  if (!req.headers.authorization) {
+    return res.status(401).json({ message: 'Token not found' });
+  }
   const { authorization } = req.headers;
   const token = authorization?.split(' ') || [];
   if (!token[1]) {
-    return res.status(401).json({ message: 'Token not found' });
+    return res.status(401).json({ message: 'Token must be a valid token' });
   }
   try {
     const decoded = jwt.verify(token[1]) as unknown as IUser;
