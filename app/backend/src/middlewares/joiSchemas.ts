@@ -26,8 +26,20 @@ const updateGoalsSchema = Joi.object({
   'any.required': allFilesMustBeFilled,
 });
 
+const createMatchSchema = Joi.object({
+  homeTeamId: Joi.number().integer().positive().required(),
+  awayTeamId: Joi.number().integer().positive().required(),
+  homeTeamGoals: Joi.number().integer().min(0).required(),
+  awayTeamGoals: Joi.number().integer().min(0).required(),
+}).messages({
+  'number.integer': 'Goals must be an integer',
+  'number.min': 'Goals must be greater than or equal to 0',
+  'any.required': allFilesMustBeFilled,
+});
+
 export default {
   loginSchema,
   idSquema,
   updateGoalsSchema,
+  createMatchSchema,
 };
