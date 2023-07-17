@@ -67,12 +67,12 @@ MatchesModel.init({
 
 MatchesModel.belongsTo(TeamModel, {
   foreignKey: 'homeTeamId',
-  as: 'home_team',
+  as: 'homeTeam',
 });
 
 MatchesModel.belongsTo(TeamModel, {
   foreignKey: 'awayTeamId',
-  as: 'away_team',
+  as: 'awayTeam',
 });
 
 export default MatchesModel;
