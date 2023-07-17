@@ -1,4 +1,4 @@
-import IMatchResponse from '../Interfaces/IMatchResponse';
+// import IMatchResponse from '../Interfaces/IMatchResponse';
 import MatchesModel from '../database/models/MatchesModel';
 import IResponse from '../Interfaces/IResponse';
 
