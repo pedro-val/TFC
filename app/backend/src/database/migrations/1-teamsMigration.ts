@@ -1,8 +1,8 @@
 import { Model, QueryInterface, DataTypes } from 'sequelize';
 
 export default {
-  up(queryInterface: QueryInterface) {
-    return queryInterface.createTable('teams', {
+  up: async (queryInterface: QueryInterface) => {
+    await queryInterface.createTable('teams', {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -14,9 +14,12 @@ export default {
         allowNull: false,
         field: 'team_name',
       },
-    });
+    }), {
+      timestamps: false,
+      underscored: true,
+    };
   },
-  down(queryInterface: QueryInterface) {
-    return queryInterface.dropTable('teams');
+  down: async (queryInterface: QueryInterface) => {
+    await queryInterface.dropTable('teams');
   },
 };

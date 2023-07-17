@@ -1,8 +1,8 @@
 import { Model, QueryInterface, DataTypes } from 'sequelize';
 
 export default {
-  up(queryInterface: QueryInterface) {
-    return queryInterface.createTable('users', {
+  up: async (queryInterface: QueryInterface) => {
+    await queryInterface.createTable('users', {
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -25,9 +25,12 @@ export default {
         allowNull: false,
         type: DataTypes.STRING,
       },
-    });
+    }), {
+      timestamps: false,
+      underscored: true,
+    };
   },
-  down(queryInterface: QueryInterface) {
-    return queryInterface.dropTable('users');
+  down: async (queryInterface: QueryInterface) => {
+    await queryInterface.dropTable('users');
   },
 };

@@ -1,8 +1,14 @@
 import { Model, QueryInterface, DataTypes } from 'sequelize';
 
 export default {
-    up(queryInterface: QueryInterface) {
-        return queryInterface.createTable('matches', {
+    up: async (queryInterface: QueryInterface) => {
+        await queryInterface.createTable('matches', {
+            id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+            },
             homeTeamId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -36,9 +42,13 @@ export default {
                 allowNull: false,
                 field: 'in_progress',
             },
-        })
+        }), {
+            timestamps: false,
+            underscored: true,
+        };
     },
-    down(queryInterface: QueryInterface) {
-        return queryInterface.dropTable('matches');
+    
+    down: async (queryInterface: QueryInterface) => {
+        await queryInterface.dropTable('matches');
       },
 }
