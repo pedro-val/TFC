@@ -37,4 +37,34 @@ export default class MatcheService {
       data: MatcheService.mappingResponse(matches),
     };
   }
+
+  async finishMatch(matchId: number): Promise<IResponse> {
+    const match = await this.matchesModel.findByPk(matchId);
+    if (!match) {
+      return {
+        status: 404,
+        data: { message: 'Match not found' },
+      };
+    }
+    await match.update({ inProgress: false });
+    return {
+      status: 200,
+      data: { message: 'Finished' },
+    };
+  }
+
+  async updateMatchGoals(id: number, goals: number[]): Promise<IResponse> {
+    const match = await this.matchesModel.findByPk(id);
+    if (!match) {
+      return {
+        status: 404,
+        data: { message: 'Match not found' },
+      };
+    }
+    await match.update({ homeTeamGoals: goals[0], awayTeamGoals: goals[1] });
+    return {
+      status: 200,
+      data: { message: 'Goals updated' },
+    };
+  }
 }
