@@ -53,30 +53,6 @@ export default class LeaderboardService {
     return teamData;
   }
 
-  // static orderTeams(teamData: ITeamStatistics[]): ITeamStatistics[] {
-  //   return teamData.sort((a, b) => {
-  //     if (a.totalPoints > b.totalPoints) {
-  //       return -1;
-  //     }
-  //     if (a.totalPoints < b.totalPoints) {
-  //       return 1;
-  //     }
-  //     if (a.goalsBalance > b.goalsBalance) {
-  //       return -1;
-  //     }
-  //     if (a.goalsBalance < b.goalsBalance) {
-  //       return 1;
-  //     }
-  //     if (a.goalsFavor > b.goalsFavor) {
-  //       return -1;
-  //     }
-  //     if (a.goalsFavor < b.goalsFavor) {
-  //       return 1;
-  //     }
-  //     return 0;
-  //   });
-  // }
-
   static orderTeams(teamData: ITeamStatistics[]): ITeamStatistics[] {
     return teamData.sort((a, b) => {
       const goalsBalanceA = a.goalsBalance || 0;
