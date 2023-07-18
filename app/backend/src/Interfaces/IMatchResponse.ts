@@ -1,5 +1,5 @@
 export default interface IMatchResponse {
-  id: number;
+  id?: number;
   homeTeamId: number;
   homeTeamGoals: number;
   awayTeamId: number;
@@ -8,7 +8,7 @@ export default interface IMatchResponse {
   homeTeam: {
     teamName: string;
   };
-  awayTeam: {
+  awayTeam?: {
     teamName: string;
   };
 }

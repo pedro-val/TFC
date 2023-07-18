@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import MatcheController from '../controller/MatcheController';
+import MatcheController from '../controller/MatchesController';
 import idValidator from '../middlewares/idMiddleware';
 import authMiddleware from '../middlewares/tokenValidator';
 import createMatchMiddleware from '../middlewares/createMatchMiddleware';

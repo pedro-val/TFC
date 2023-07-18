@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import MatcheService from '../service/MatcheService';
+import MatcheService from '../service/MatchesService';
 
 export default class MatcheController {
   constructor(private matcheService = new MatcheService()) {}

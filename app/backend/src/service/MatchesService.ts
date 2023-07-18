@@ -7,14 +7,17 @@ import IResponse from '../Interfaces/IResponse';
 export default class MatcheService {
   constructor(private matchesModel = MatchesModel) {}
 
-  private static mappingResponse(matches: MatchesModel[]) {
+  static mappingResponse(matches: MatchesModel[]) {
     return matches.map((match) => {
       const eachMatchResponse = match.toJSON() as IMatchResponse;
-      return {
-        ...eachMatchResponse,
-        homeTeam: { teamName: eachMatchResponse.homeTeam.teamName },
-        awayTeam: { teamName: eachMatchResponse.awayTeam.teamName },
-      };
+      if (eachMatchResponse.homeTeam && eachMatchResponse.awayTeam) {
+        return {
+          ...eachMatchResponse,
+          homeTeam: { teamName: eachMatchResponse.homeTeam.teamName },
+          awayTeam: { teamName: eachMatchResponse.awayTeam.teamName },
+        };
+      }
+      return eachMatchResponse;
     });
   }
 
