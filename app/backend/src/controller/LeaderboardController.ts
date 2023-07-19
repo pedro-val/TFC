@@ -24,4 +24,9 @@ export default class LeaderboardController {
     }
     return res.status(404).json({ message: 'Not found' });
   }
+
+  async getAallLeaderboard(req: Request, res: Response): Promise<Response> {
+    const allLeaderboard = await this.leaderboardService.getAllLeaderboard();
+    return res.status(allLeaderboard.status).json(allLeaderboard.data);
+  }
 }

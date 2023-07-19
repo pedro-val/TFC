@@ -13,5 +13,9 @@ leaderboardRouter.get(
   '/home',
   (req, res) => leaderboardController.getTeamStatistics(req, res),
 );
+leaderboardRouter.get(
+  '/',
+  (req, res) => leaderboardController.getAallLeaderboard(req, res),
+);
 
 export default leaderboardRouter;

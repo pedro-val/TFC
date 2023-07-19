@@ -1,9 +1,9 @@
 import ITeamStatistics from '../Interfaces/ITeamStatistics';
-import IResponse from '../Interfaces/IResponse';
 import TeamModel from '../database/models/TeamModel';
 import MatchesModel from '../database/models/MatchesModel';
 import MatcheService from './MatchesService';
 import IMatchResponse from '../Interfaces/IMatchResponse';
+import ILeaderboardResponse from '../Interfaces/ILeaderboardResponse';
 
 export default class LeaderboardService {
   constructor(
@@ -126,7 +126,45 @@ export default class LeaderboardService {
     return response;
   }
 
-  async getTeamStatistics(reqPath: string): Promise<IResponse> {
+  static somAwayAndHome(away: ITeamStatistics[], home: ITeamStatistics[]): ITeamStatistics[] {
+    let response: ITeamStatistics[] = [];
+    for (let i = 0; i < away.length; i += 1) {
+      const totalgoalsBalance = (away[i]?.goalsBalance || 0) + (home[i]?.goalsBalance || 0);
+      const som: ITeamStatistics = { name: away[i].name,
+        totalPoints: away[i].totalPoints + home[i].totalPoints,
+        totalGames: away[i].totalGames + home[i].totalGames,
+        totalVictories: away[i].totalVictories + home[i].totalVictories,
+        totalDraws: away[i].totalDraws + home[i].totalDraws,
+        totalLosses: away[i].totalLosses + home[i].totalLosses,
+        goalsFavor: away[i].goalsFavor + home[i].goalsFavor,
+        goalsOwn: away[i].goalsOwn + home[i].goalsOwn,
+        goalsBalance: totalgoalsBalance,
+      };
+      som.efficiency = Number(((som.totalPoints / (som.totalGames * 3)) * 100).toFixed(2));
+      response = [...response, som];
+    }
+    return response;
+  }
+
+  static orderTeamsByName(away: ITeamStatistics[], home: ITeamStatistics[]) {
+    const awayOrdered = away.sort((c, b) => c.name.localeCompare(b.name));
+    const homeOrdered = home.sort((c, b) => c.name.localeCompare(b.name));
+    return LeaderboardService.somAwayAndHome(awayOrdered, homeOrdered);
+  }
+
+  async getAllLeaderboard(): Promise<ILeaderboardResponse<ITeamStatistics[]>> {
+    const awayStatics: ILeaderboardResponse<ITeamStatistics[]> = await this
+      .getTeamStatistics('awayTeamId');
+    const homeStatics: ILeaderboardResponse<ITeamStatistics[]> = await this
+      .getTeamStatistics('homeTeamId');
+    const leaderboard: ITeamStatistics[] = LeaderboardService
+      .orderTeamsByName(awayStatics.data, homeStatics.data);
+    const finalLeaderboard = LeaderboardService.orderTeams(leaderboard);
+    return { status: 200, data: finalLeaderboard };
+  }
+
+  async getTeamStatistics(reqPath: string):
+  Promise<ILeaderboardResponse<ITeamStatistics[]>> {
     const teams = await this.teamModel.findAll();
     const allMatches = await this.getAllMatches();
     const allTeams = teams.map((team) => team.toJSON()) as TeamModel[];

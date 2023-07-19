@@ -11,5 +11,5 @@ export default interface ITeamStatistics {
     teamName: string;
   }
   goalsBalance?: number;
-  efficiency?: number | undefined;
+  efficiency?: number;
 }

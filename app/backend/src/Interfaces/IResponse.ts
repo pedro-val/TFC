@@ -1,4 +1,7 @@
+import IMatchResponse from './IMatchResponse';
+import ITeamStatistics from './ITeamStatistics';
+
 export default interface IResponse {
   status: number;
-  data: string | object | object[];
+  data: IMatchResponse[] | ITeamStatistics[] | string | object;
 }
