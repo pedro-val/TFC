@@ -8,8 +8,20 @@ export default class LeaderboardController {
     private leaderboardService = new LeaderboardService(TeamModel, MatchesModel),
   ) {}
 
-  async getHomeTeamStatistics(req: Request, res: Response): Promise<Response> {
-    const homeLeaderboard = await this.leaderboardService.getHomeTeamStatistics();
-    return res.status(homeLeaderboard.status).json(homeLeaderboard.data);
+  async getTeamStatistics(req: Request, res: Response): Promise<Response> {
+    if (req.path) {
+      let reqPath;
+      if (req.path === '/home') {
+        reqPath = 'homeTeamId';
+        const homeLeaderboard = await this.leaderboardService.getTeamStatistics(reqPath);
+        return res.status(homeLeaderboard.status).json(homeLeaderboard.data);
+      }
+      if (req.path === '/away') {
+        reqPath = 'awayTeamId';
+        const homeLeaderboard = await this.leaderboardService.getTeamStatistics(reqPath);
+        return res.status(homeLeaderboard.status).json(homeLeaderboard.data);
+      }
+    }
+    return res.status(404).json({ message: 'Not found' });
   }
 }
