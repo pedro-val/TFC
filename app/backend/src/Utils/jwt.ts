@@ -14,6 +14,7 @@ function sign(payload: TokenPayload): string {
 
 function verify(token: string): TokenPayload {
   const decoded = jwt.verify(token, secret) as TokenPayload;
+  console.log(decoded);
   return decoded;
 }
 
