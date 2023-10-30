@@ -2,6 +2,32 @@
 
 O TFC é um site informativo sobre partidas e classificações de futebol!
 
+## Tecnologias Utilizadas
+
+Neste projeto, foram utilizadas as seguintes tecnologias e ferramentas:
+
+- Node.js: Utilizado como ambiente de execução do servidor.
+- Express.js: Framework Node.js para criação de rotas e endpoints da API.
+- Sequelize: ORM (Object-Relational Mapping) para interagir com o banco de dados.
+- Docker: Utilizado para containerizar as aplicações e o banco de dados.
+- PostgreSQL: Banco de dados relacional utilizado para armazenar os dados do projeto.
+- JWT (JSON Web Tokens): Utilizado para autenticação de usuários.
+- TDD (Test-Driven Development): Metodologia de desenvolvimento que envolve a criação de testes antes da implementação de funcionalidades.
+
+## Aprendizados
+
+Durante o desenvolvimento deste projeto, pude adquirir conhecimentos e experiências valiosas, incluindo:
+
+- Desenvolvimento de APIs em Node.js com Express.
+- Integração de aplicações com bancos de dados PostgreSQL utilizando Sequelize.
+- Utilização de contêineres Docker para gerenciar aplicações e banco de dados.
+- Implementação de autenticação e autorização usando JSON Web Tokens (JWT).
+- Prática de Test-Driven Development (TDD) para garantir a qualidade do código.
+- Criação de endpoints para diferentes fluxos de um aplicativo, como partidas de futebol, classificações e autenticação de usuários.
+
+Estes aprendizados foram fundamentais para o sucesso deste projeto e contribuirão para o desenvolvimento de projetos futuros.
+
+
 ## Descrição do Projeto
 
 No time de desenvolvimento do TFC, seu squad foi responsável por desenvolver uma API (utilizando o método TDD) e também integrar - através do docker-compose - as aplicações para que elas funcionem consumindo um banco de dados.
