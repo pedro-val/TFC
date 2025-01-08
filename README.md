@@ -1,105 +1,101 @@
-# TFC - Site Informativo de Futebol ⚽️
+# TFC - Informative Football Website ⚽️
 
-O TFC é um site informativo sobre partidas e classificações de futebol!
+TFC is an informative website about football matches and standings!
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-Neste projeto, foram utilizadas as seguintes tecnologias e ferramentas:
+In this project, the following technologies and tools were used:
 
-- Node.js: Utilizado como ambiente de execução do servidor.
-- Express.js: Framework Node.js para criação de rotas e endpoints da API.
-- Sequelize: ORM (Object-Relational Mapping) para interagir com o banco de dados.
-- Docker: Utilizado para containerizar as aplicações e o banco de dados.
-- PostgreSQL: Banco de dados relacional utilizado para armazenar os dados do projeto.
-- JWT (JSON Web Tokens): Utilizado para autenticação de usuários.
-- TDD (Test-Driven Development): Metodologia de desenvolvimento que envolve a criação de testes antes da implementação de funcionalidades.
+- **Node.js**: Used as the server runtime environment.
+- **Express.js**: Node.js framework for creating routes and API endpoints.
+- **Sequelize**: ORM (Object-Relational Mapping) for interacting with the database.
+- **Docker**: Used to containerize the applications and the database.
+- **PostgreSQL**: Relational database used to store the project data.
+- **JWT (JSON Web Tokens)**: Used for user authentication.
+- **TDD (Test-Driven Development)**: Development methodology that involves creating tests before implementing features.
 
-## Aprendizados
+## Learnings
 
-Durante o desenvolvimento deste projeto, pude adquirir conhecimentos e experiências valiosas, incluindo:
+During the development of this project, I gained valuable knowledge and experience, including:
 
-- Desenvolvimento de APIs em Node.js com Express.
-- Integração de aplicações com bancos de dados PostgreSQL utilizando Sequelize.
-- Utilização de contêineres Docker para gerenciar aplicações e banco de dados.
-- Implementação de autenticação e autorização usando JSON Web Tokens (JWT).
-- Prática de Test-Driven Development (TDD) para garantir a qualidade do código.
-- Criação de endpoints para diferentes fluxos de um aplicativo, como partidas de futebol, classificações e autenticação de usuários.
+- Developing APIs in Node.js with Express.
+- Integrating applications with PostgreSQL databases using Sequelize.
+- Using Docker containers to manage applications and databases.
+- Implementing authentication and authorization using JSON Web Tokens (JWT).
+- Practicing Test-Driven Development (TDD) to ensure code quality.
+- Creating endpoints for different flows of an application, such as football matches, standings, and user authentication.
 
-Estes aprendizados foram fundamentais para o sucesso deste projeto e contribuirão para o desenvolvimento de projetos futuros.
+These learnings were crucial for the success of this project and will contribute to the development of future projects.
 
+## Project Description
 
-## Descrição do Projeto
+In the TFC development team, our squad was responsible for developing an API (using the TDD method) and also integrating the applications via docker-compose to make them work with a database.
 
-No time de desenvolvimento do TFC, seu squad foi responsável por desenvolver uma API (utilizando o método TDD) e também integrar - através do docker-compose - as aplicações para que elas funcionem consumindo um banco de dados.
+In this project, a dockerized backend was developed using data modeling through Sequelize. The development followed the business rules provided in the project, and the API was able to be consumed by a front-end already provided in this project.
 
-Nesse projeto, foi desenvolvido um back-end dockerizado utilizando modelagem de dados através do Sequelize. O desenvolvimento respeitou as regras de negócio providas no projeto, e a API foi capaz de ser consumida por um front-end já provido nesse projeto.
+To add a match, a token was required, meaning the user needed to be logged in to make changes. There was a relationship between the teams and matches tables to update the matches.
 
-Para adicionar uma partida, era necessário ter um token, portanto a pessoa deveria estar logada para fazer as alterações. Houve um relacionamento entre as tabelas teams e matches para fazer as atualizações das partidas.
+The backend implemented business rules to properly populate the table available on the front-end, which was displayed to the system user.
 
-O back-end desenvolvido implementou regras de negócio para popular adequadamente a tabela disponível no front-end, que foi exibida para a pessoa usuária do sistema.
+## Project Composition
 
-## Composição do Projeto
+This project was composed of 4 main flows:
 
-Esse projeto foi composto de 4 fluxos principais:
+### Teams
 
-### Teams (Times)
+**Introduction**
+The following requirements considered consuming the `/teams` route to return the names of teams associated with a match in the front-end rendering.
 
-**Introdução**
-Os requisitos a seguir consideraram o consumo da rota /teams para retornar os nomes dos times associados à partida na renderização do front-end.
+1. A migration and model were developed in `/app/backend/src/database` in the corresponding folders for the teams table.
+2. (TDD) Tests were developed covering at least 5% of the files in `/app/backend/src`, with a minimum of 7 lines covered.
+3. The `/teams` endpoint was developed on the backend to return all teams correctly.
+4. (TDD) Tests were developed covering at least 10% of the files in `/app/backend/src`, with a minimum of 19 lines covered.
+5. The `/teams/:id` endpoint was developed on the backend to return data for a specific team.
 
-1. Foram desenvolvidas, em /app/backend/src/database nas pastas correspondentes, uma migration e um model para a tabela de times.
-2. (TDD) Foram desenvolvidos testes que cobriram no mínimo 5 por cento dos arquivos em /app/backend/src, com um mínimo de 7 linhas cobertas.
-3. Foi desenvolvido o endpoint /teams no back-end de forma que ele pudesse retornar todos os times corretamente.
-4. (TDD) Foram desenvolvidos testes que cobriram no mínimo 10 por cento dos arquivos em /app/backend/src, com um mínimo de 19 linhas cobertas.
-5. Foi desenvolvido o endpoint /teams/:id no back-end de forma que ele pudesse retornar dados de um time específico.
+### Users and Login
 
-### Users e Login (Pessoas Usuárias e Credenciais de Acesso)
+**Introduction**
+The route used was `/login`;
 
-**Introdução**
-A rota utilizada foi (/login);
+The route received the email and password fields, and these fields were validated in the database:
 
-A rota recebeu os campos email e password, e esses campos foram validados no banco de dados:
+6. A migration and model were developed in `/app/backend/src/database` in the corresponding folders for the users table.
+7. (TDD) Tests were developed covering at least 15% of the files in `/app/backend/src`, with a minimum of 25 lines covered.
+8. The `/login` endpoint was developed on the backend to allow access with valid data in the front-end.
+9. (TDD) Tests were developed covering at least 20% of the files in `/app/backend/src`, with a minimum of 35 lines covered.
+10. The `/login` endpoint was developed on the backend to prevent access with an unregistered email or incorrect password in the front-end.
+11. (TDD) A validation middleware for the token was developed, checking if it was valid, and the `/login/role` endpoint was developed on the backend to return data correctly in the front-end.
 
-6. Foram desenvolvidas, em /app/backend/src/database nas pastas correspondentes, uma migration e um model para a tabela de pessoas usuárias.
-7. (TDD) Foram desenvolvidos testes que cobriram no mínimo 15 por cento dos arquivos em /app/backend/src, com um mínimo de 25 linhas cobertas.
-8. Foi desenvolvido o endpoint /login no back-end de maneira que permitisse o acesso com dados válidos no front-end.
-9. (TDD) Foram desenvolvidos testes que cobriram no mínimo 20 por cento dos arquivos em /app/backend/src, com um mínimo de 35 linhas cobertas.
-10. Foi desenvolvido o endpoint /login no back-end de maneira que não permitisse o acesso com um email não cadastrado ou senha incorreta no front-end.
-11. (TDD) Foi desenvolvido um middleware de validação para o token, verificando se ele era válido, e foi desenvolvido o endpoint /login/role no back-end de maneira que ele retornasse os dados corretamente no front-end.
+### Matches
 
-### Matches (Partidas)
+**Introduction**
+For the match creation requirements, it was necessary to implement the model and some routes related to the Match entity.
 
-**Introdução**
-Para os requisitos de criação de partidas, foi necessário implementar o model e algumas rotas relacionadas à entidade Match.
+12. A migration and model were developed in `/app/backend/src/database` in the corresponding folders for the matches table.
+13. (TDD) Tests were developed covering at least 45% of the files in `/app/backend/src`, with a minimum of 70 lines covered.
+14. The `/matches` endpoint was developed so that the data would appear correctly on the front-end match screen.
+15. The `/matches` endpoint was developed to allow filtering only ongoing matches and only completed matches on the front-end match screen.
+16. The `/matches/:id/finish` endpoint was developed so that a match could be finished in the database.
+17. The `/matches/:id` endpoint was developed so that ongoing matches could be updated.
+18. (TDD) Tests were developed covering at least 60% of the files in `/app/backend/src`, with a minimum of 80 lines covered.
+19. The `/matches` endpoint was developed to allow adding a new ongoing match to the database.
+20. The `/matches` endpoint was developed to prevent adding a match with the same teams or a team that does not exist in the teams table.
 
+### Leaderboards
 
-12. Foram desenvolvidas, em /app/backend/src/database nas pastas correspondentes, uma migration e um model para a tabela de partidas.
-13. (TDD) Foram desenvolvidos testes que cobriram no mínimo 45 por cento dos arquivos em /app/backend/src, com um mínimo de 70 linhas cobertas.
-14. Foi desenvolvido o endpoint /matches de forma que os dados aparecessem corretamente na tela de partidas no front-end.
-15. Foi desenvolvido o endpoint /matches de forma que fosse possível filtrar somente as partidas em andamento, e também filtrar somente as partidas finalizadas, na tela de partidas do front-end.
-16. Foi desenvolvido o endpoint /matches/:id/finish de modo que fosse possível finalizar uma partida no banco de dados.
-17. Foi desenvolvido o endpoint /matches/:id de forma que fosse possível atualizar partidas em andamento.
-18. (TDD) Foram desenvolvidos testes que cobriram no mínimo 60 por cento dos arquivos em /app/backend/src, com um mínimo de 80 linhas cobertas.
-19. Foi desenvolvido o endpoint /matches de modo que fosse possível cadastrar uma nova partida em andamento no banco de dados.
-20. Foi desenvolvido o endpoint /matches de forma que não fosse possível inserir uma partida com times iguais nem com um time que não existisse na tabela de times.
+**Introduction**
+To build the team standings, the specified business rules were followed.
 
-### Leaderboards (Placares)
+21. (Bonus; TDD) Tests were developed covering at least 80% of the files in `/app/backend/src`, with a minimum of 100 lines covered.
+22. The `/leaderboard/home` endpoint was developed to return the home team's performance information.
+23. The `/leaderboard/home` endpoint was developed to allow filtering the home team standings on the front-end leaderboard screen and updating the table when inserting the match Corinthians 2 X 1 Internacional.
+24. The `/leaderboard/home` endpoint was developed to allow filtering the home team standings on the front-end leaderboard screen, including the `goalsBalance` and `efficiency` properties, in addition to the previous properties.
+25. The `/leaderboard/away` endpoint was developed to return the away team's performance information.
 
-**Introdução**
-Para construir a classificação dos times, seguiram-se as regras de negócios especificadas.
+## Leaderboards
 
-21. (Bônus; TDD) Foram desenvolvidos testes que cobriram no mínimo 80 por cento dos arquivos em /app/backend/src, com um mínimo de 100 linhas cobertas.
-22. Foi desenvolvido o endpoint /leaderboard/home de forma que retornasse as informações do desempenho dos times da casa.
-23. Foi desenvolvido o endpoint /leaderboard/home de forma que fosse possível filtrar as classificações dos times da casa na tela de classificação do front-end e atualizar a tabela ao inserir a partida Corinthians 2 X 1 Internacional.
-24. Foi desenvolvido o endpoint /leaderboard/home de forma que fosse possível filtrar as classificações dos times da casa na tela de classificação do front-end, incluindo as propriedades goalsBalance e efficiency, além das propriedades do requisito anterior.
-25. Foi desenvolvido o endpoint /leaderboard/away de forma que retornasse as informações do desempenho dos times
-
-## Leaderboards (Placares)
-
-
-26. Foi desenvolvido o endpoint /leaderboard/away de forma que fosse possível filtrar as classificações dos times visitantes na tela de classificação do front-end.
-27. Foi desenvolvido o endpoint /leaderboard/away de forma que fosse possível filtrar as classificações dos times visitantes na tela de classificação do front-end, incluindo as propriedades goalsBalance e efficiency, além das propriedades do requisito anterior.
-28. Foi desenvolvido o endpoint /leaderboard/:team de forma que fosse possível buscar o desempenho de um time em específico na tela de classificação.
-29. (Bônus; TDD) Foi desenvolvido o endpoint /leaderboard/ desempenho de todos os times na tela de classificação.
-30. Foi desenvolvido o endpoint /leaderboard/ de forma que fosse possível buscar o desempenho de todos os times na tela de classificação, incluindo as propriedades goalsBalance e efficiency, além das propriedades dos requisitos anteriores.
-
+26. The `/leaderboard/away` endpoint was developed to allow filtering the away team standings on the front-end leaderboard screen.
+27. The `/leaderboard/away` endpoint was developed to allow filtering the away team standings on the front-end leaderboard screen, including the `goalsBalance` and `efficiency` properties, in addition to the previous properties.
+28. The `/leaderboard/:team` endpoint was developed to allow searching for a specific team's performance on the leaderboard screen.
+29. (Bonus; TDD) The `/leaderboard/` endpoint was developed to return the performance of all teams on the leaderboard screen.
+30. The `/leaderboard/` endpoint was developed to allow searching for the performance of all teams on the leaderboard screen, including the `goalsBalance` and `efficiency` properties, in addition to the previous properties.
